@@ -4,6 +4,8 @@
 
 The **Art Application Academy (AAA)** is an innovative platform designed to **make the college application process more accessible and affordable** for high school students interested in **art, design, and architecture**, particularly those from **low-income families**. By providing AI-driven tools and human mentorship, AAA helps students build competitive portfolios, match with universities, and complete their applications at a **low cost or for free**, significantly lowering the barriers to higher education for students in underserved regions.
 
+Demo for AI Model: https://energelpen.github.io/Art-Application-Academy/bart_website/aimatcher.html
+
 ---
 
 ## Objective
