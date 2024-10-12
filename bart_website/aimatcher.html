@@ -10,7 +10,7 @@
     <style>
         .suggestions {
             display: flex;
-            animation: scroll 20s linear infinite;
+            animation: scroll 60s linear infinite; /* Slower scrolling */
         }
 
         @keyframes scroll {
@@ -64,11 +64,10 @@
 
             <!-- Suggestions (scrolling) -->
             <div class="bg-gray-100 p-2 rounded shadow-sm overflow-hidden mb-4">
-                <div class="suggestions space-x-4 items-center">
+                <div class="suggestions space-x-16 items-center"> <!-- Increased space between buttons -->
                     <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about architecture universities'">Architecture</button>
                     <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about graphic arts universities'">Graphic Arts</button>
                     <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about fashion universities'">Fashion</button>
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about culinary universities'">Culinary</button>
                     <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about music universities'">Music</button>
                     <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about theater universities'">Theater</button>
                     <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about animation universities'">Animation</button>
@@ -112,14 +111,13 @@
 
         music: `Leading music schools in Asia include Tokyo University of the Arts and Seoul National University. Students at Tokyo praise its rigorous training, while SNU focuses on both performance and musicology. In Europe, the Royal Academy of Music emphasizes performance excellence, garnering positive reviews from students. In the U.S., Juilliard is consistently rated highly for its competitive atmosphere and world-class faculty.`,
 
-        culinary: `Top culinary schools in Asia include Le Cordon Bleu in Tokyo and Culinary Institute of America in Singapore. Le Cordon Bleu is noted for blending French techniques with local flavors. In Europe, Ferrandi Paris focuses on gastronomy, with many graduates achieving success in their culinary careers. In the U.S., CIA is praised for its hands-on approach to learning.`,
-
         theater: `Notable theater schools in Asia include National School of Drama in India and Tokyo University of the Arts. The former produces acclaimed actors who highlight its focus on classical traditions. In Europe, RADA is renowned for classical training that opens doors to London's theater scene. Yale's School of Drama in the U.S. is noted for its rigorous MFA program that has produced many successful alumni.`,
 
         photography: `Top photography schools in Asia include NID in India and Tokyo College of Photography. NID emphasizes conceptual photography while Tokyo offers comprehensive training across formats. In Europe, LCC integrates technology creatively into its curriculum, receiving high praise from students. In the U.S., SCAD is known for pushing creative boundaries within both fine art and commercial photography contexts.`,
     };
 
         async function loadModel() {
+            // Using Universal Sentence Encoder from TensorFlow.js
             const model = await use.load();
             return model;
         }
@@ -143,8 +141,6 @@
                 relevantContext = context.graphicArts;
             } else if (question.includes('fashion')) {
                 relevantContext = context.fashion;
-            } else if (question.includes('culinary')) {
-                relevantContext = context.culinary;
             } else if (question.includes('music')) {
                 relevantContext = context.music;
             } else if (question.includes('theater')) {
