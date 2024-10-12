@@ -3,47 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Matcher</title>
+    <title>University</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script>
-</head>
-<body class="bg-gray-100 font-sans">
-    <div class="container mx-auto px-4 py-8">
-        <h1 class="text-4xl font-bold text-center mb-8 text-blue-600">AI Matcher</h1>
-        
-        <div class="mb-4">
-            <input type="text" id="question" placeholder="Enter your question" class="w-full p-3 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        </div>
-        <button id="ask" class="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600">Ask</button>
-        
-        <div id="loading" class="hidden mt-4 text-center">
-            <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full border-blue-600" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <p class="text-gray-700">Loading model, please wait...</p>
-        </div>
+    <style>
+        .suggestions {
+            display: flex;
+            animation: scroll 20s linear infinite;
+        }
 
-        <p id="answer" class="mt-4 text-gray-800 p-4 border border-gray-300 rounded shadow bg-white"></p>
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .loading-spinner {
+            border-top-color: transparent;
+            border-left-color: transparent;
+            border-radius: 50%;
+            width: 2.5rem;
+            height: 2.5rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-white font-sans">
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 flex items-center justify-center bg-blue-600 text-white text-2xl z-50">
+        <div class="loading-spinner border-4 border-white"></div>
+        <p class="ml-4">Loading model, please wait...</p>
     </div>
 
-    <footer class="bg-gray-800 text-white py-4 text-center">
+    <div class="flex min-h-screen">
+        <!-- Left Sidebar -->
+        <div class="bg-white text-blue-600 w-64 p-6 hidden lg:block border-r border-gray-300">
+            <h2 class="text-3xl font-bold mb-8">Menu</h2>
+            <ul class="space-y-4">
+                <li><a href="#" class="block hover:bg-blue-100 p-2 rounded">Home</a></li>
+                <li><a href="#" class="block hover:bg-blue-100 p-2 rounded">About</a></li>
+                <li><a href="#" class="block hover:bg-blue-100 p-2 rounded">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-4 lg:p-8">
+            <h1 class="text-4xl font-bold text-center mb-8 text-blue-600">AI Matcher</h1>
+
+            <!-- Chat Input Box -->
+            <div class="flex items-center mb-4">
+                <input type="text" id="question" placeholder="Ask about universities or courses..." class="w-full p-3 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <button id="ask" class="bg-blue-500 text-white px-4 py-3 rounded-r-lg hover:bg-blue-600">Send</button>
+            </div>
+
+            <!-- Suggestions (scrolling) -->
+            <div class="bg-gray-100 p-2 rounded shadow-sm overflow-hidden mb-4">
+                <div class="suggestions space-x-4 items-center">
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about architecture universities'">Architecture</button>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about graphic arts universities'">Graphic Arts</button>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about fashion universities'">Fashion</button>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about culinary universities'">Culinary</button>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about music universities'">Music</button>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about theater universities'">Theater</button>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about animation universities'">Animation</button>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about photography universities'">Photography</button>
+                </div>
+            </div>
+
+            <!-- Answer Display -->
+            <p id="answer" class="mt-4 text-gray-800 p-4 border border-gray-300 rounded shadow bg-white"></p>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="bg-white text-blue-600 w-64 p-6 hidden lg:block border-l border-gray-300">
+            <h2 class="text-3xl font-bold mb-8">Navigation</h2>
+            <ul class="space-y-4">
+                <li><a href="#" class="block hover:bg-blue-100 p-2 rounded">Universities</a></li>
+                <li><a href="#" class="block hover:bg-blue-100 p-2 rounded">Courses</a></li>
+                <li><a href="#" class="block hover:bg-blue-100 p-2 rounded">Scholarships</a></li>
+                <li><a href="#" class="block hover:bg-blue-100 p-2 rounded">Careers</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white text-blue-600 py-4 text-center fixed inset-x-0 bottom-0 border-t border-gray-300">
         <p class="text-lg">AAA - Art Application Academy</p>
     </footer>
 
     <script>
         // Hardcoded context
         const context = {
-            architecture: `In Asia, some of the top architecture universities include the National University of Singapore, Tsinghua University and Tongji University in China, the University of Tokyo in Japan, and Hong Kong University of Science and Technology. In Europe, leading schools are ETH Zurich in Switzerland, Delft University of Technology in the Netherlands, AA School of Architecture in the UK, Politecnico di Milano in Italy, and École nationale supérieure d'architecture de Paris-La Villette in France. In the United States, consider Massachusetts Institute of Technology (MIT), University of California, Berkeley, Harvard University, Yale University, and Columbia University.`,
-            graphicArts: `The top graphic arts programs in Asia include Hong Kong Polytechnic University, Kyoto Seika University in Japan, National Taiwan University of Arts, Seoul National University in South Korea, and Beijing University of Technology in China. Leading institutions in Europe are the Royal College of Art in the UK, École supérieure d'art et design de Saint-Étienne in France, Kunsthochschule Berlin-Weißensee in Germany, Central Saint Martins in the UK, and Design Academy Eindhoven in the Netherlands. In the United States, renowned schools include the School of Visual Arts in New York, Rhode Island School of Design (RISD), California Institute of the Arts (CalArts), Savannah College of Art and Design (SCAD), and Pratt Institute in New York.`,
-            design: `The best design universities in Asia include the National Institute of Design in India, Hong Kong Design Institute, Beijing Central Academy of Fine Arts in China, Nanyang Technological University in Singapore, and National Cheng Kung University in Taiwan. Top design schools in Europe are Politecnico di Milano in Italy, Aalto University in Finland, Royal Danish Academy of Fine Arts in Denmark, École de design Nantes Atlantique in France, and University of the Arts London in the UK. In the United States, top choices are Rhode Island School of Design (RISD), ArtCenter College of Design in California, Carnegie Mellon University, School of the Art Institute of Chicago (SAIC), and Savannah College of Art and Design (SCAD).`,
-            fashion: `Leading fashion schools in Asia include Bunka Fashion College in Japan, Hong Kong Polytechnic University’s Institute of Textiles and Clothing, National Institute of Fashion Technology in India, Raffles Design Institute in Singapore, and Kookmin University in South Korea. Top fashion schools in Europe are Central Saint Martins in the UK, Istituto Marangoni in Italy, École de la Chambre Syndicale de la Couture Parisienne in France, Fashion Institute of Technology (SUNY) in New York, and Royal Academy of Fine Arts in Belgium. Prominent fashion universities in the United States include the Fashion Institute of Technology (SUNY), Parsons School of Design in New York, Academy of Art University in San Francisco, California College of the Arts, and the School of Fashion at Kent State University.`,
-            animation: `Top animation schools in Asia include Tokyo University of the Arts in Japan, National School of Drama in India, Hong Kong Baptist University’s Academy of Film, Seoul Institute of the Arts in South Korea, and Beijing Film Academy in China. Leading animation institutions in Europe are National Film and Television School in the UK, La Poudrière in France, Kunsthochschule für Medien Köln in Germany, Falmouth University in the UK, and Ringling College of Art and Design in the USA. In the United States, renowned animation schools include California Institute of the Arts (CalArts), School of Visual Arts in New York, Ringling College of Art and Design in Florida, University of Southern California’s School of Cinematic Arts, and Savannah College of Art and Design (SCAD).`,
-            music: `Top music schools in Asia include Tokyo University of the Arts in Japan, Seoul National University in South Korea, National University of Singapore, Hong Kong Academy for Performing Arts, and Zhejiang Conservatory of Music in China. Leading music schools in Europe are the Royal Academy of Music in the UK, Hochschule für Musik und Theater Hamburg in Germany, Conservatoire de Paris in France, Sibelius Academy in Finland, and Royal Northern College of Music in the UK. Prominent music schools in the United States include the Juilliard School in New York, Berklee College of Music in Boston, Curtis Institute of Music in Philadelphia, University of Southern California’s Thornton School of Music, and Manhattan School of Music in New York.`,
-            culinary: `Top culinary schools in Asia include Le Cordon Bleu in Tokyo, Apicius in Florence, Culinary Institute of America in Singapore, International Culinary Center in Hong Kong, and Sunrice Global Chef Academy in Singapore. Leading culinary schools in Europe are Le Cordon Bleu in France, Apicius in Italy, Culinary Institute of Florence in Italy, Westminster Kingsway College in the UK, and Ferrandi Paris in France. In the United States, renowned culinary schools include Culinary Institute of America in New York, Johnson & Wales University in Rhode Island, Le Cordon Bleu in Portland, Auguste Escoffier School of Culinary Arts in Colorado, and Institute of Culinary Education in New York.`,
-            theater: `Top theater schools in Asia include National School of Drama in India, Tokyo University of the Arts in Japan, Shanghai Theatre Academy in China, Seoul Arts Center in South Korea, and Hong Kong Academy of Performing Arts. Leading theater schools in Europe are the Royal Academy of Dramatic Art (RADA) in the UK, Bristol Old Vic Theatre School in the UK, École nationale supérieure des arts et techniques du théâtre in France, Theatre School at the University of Southern California, and Central School of Speech and Drama in the UK. Prominent theater schools in the United States include the Juilliard School in New York, Tisch School of the Arts at NYU, Boston University’s School of Theatre, University of California, Los Angeles (UCLA), and Yale School of Drama.`,
-            photography: `Top photography schools in Asia include the National Institute of Design in India, Tokyo College of Photography in Japan, Beijing Film Academy in China, Hong Kong Polytechnic University’s School of Design, and Nanyang Technological University in Singapore. Leading photography schools in Europe are the London College of Communication in the UK, École nationale supérieure de la photographie in France, FAMU - Film and TV School of the Academy of Performing Arts in the Czech Republic, Royal Academy of Art in the Netherlands, and Gerrit Rietveld Academy in the Netherlands. In the United States, renowned photography schools include the School of Visual Arts in New York, California Institute of the Arts (CalArts), Rochester Institute of Technology, Savannah College of Art and Design (SCAD), and ArtCenter College of Design in California.`
-        };
+        architecture: `In Asia, notable architecture universities include the National University of Singapore, Tsinghua University, and Tongji University. Students at NUS commend its strong emphasis on sustainability and urban planning, while Tsinghua is recognized for merging traditional Chinese design with modern techniques. In Europe, ETH Zurich and Politecnico di Milano stand out for their technical rigor and industrial connections. Graduates from ETH often highlight the intense workload but appreciate the quality of education. In the U.S., MIT is praised for its integration of engineering with design, while UC Berkeley is noted for its commitment to social responsibility. Reviews indicate that both institutions offer robust support networks for students.`,
+
+        graphicArts: `Top graphic arts programs in Asia include Hong Kong Polytechnic University and Kyoto Seika University. Students at HKPU appreciate its focus on digital media, while Kyoto Seika is noted for blending traditional Japanese art with modern practices. In Europe, the Royal College of Art is celebrated for its creativity, with alumni often citing strong industry ties. In the U.S., RISD is revered for its interdisciplinary approach, with students praising the challenging curriculum and access to resources.`,
+
+        design: `Leading design universities in Asia include the National Institute of Design in India and Nanyang Technological University in Singapore. NID is recognized for its innovative approach, while NTU emphasizes practical applications. In Europe, Politecnico di Milano is well-regarded for its industrial design program, with graduates mentioning its international exposure. In the U.S., ArtCenter College of Design is noted for its industry connections and project opportunities.`,
+
+        fashion: `Prominent fashion schools in Asia include Bunka Fashion College and Hong Kong Polytechnic University’s Institute of Textiles and Clothing. Bunka is famous for producing influential designers, while HKPU offers a strong curriculum focused on sustainability. In Europe, Central Saint Martins is known for fostering creativity, with students frequently praising its experimental approach. In the U.S., Parsons School of Design integrates sustainability into its programs, earning high marks from students.`,
+
+        animation: `Top animation schools in Asia include Tokyo University of the Arts and Beijing Film Academy. Students at Tokyo appreciate the blend of traditional and modern techniques. In Europe, NFTS provides hands-on experience that alumni find invaluable. In the U.S., CalArts is highly regarded for its influence on the animation industry, with many graduates landing roles at major studios.`,
+
+        music: `Leading music schools in Asia include Tokyo University of the Arts and Seoul National University. Students at Tokyo praise its rigorous training, while SNU focuses on both performance and musicology. In Europe, the Royal Academy of Music emphasizes performance excellence, garnering positive reviews from students. In the U.S., Juilliard is consistently rated highly for its competitive atmosphere and world-class faculty.`,
+
+        culinary: `Top culinary schools in Asia include Le Cordon Bleu in Tokyo and Culinary Institute of America in Singapore. Le Cordon Bleu is noted for blending French techniques with local flavors. In Europe, Ferrandi Paris focuses on gastronomy, with many graduates achieving success in their culinary careers. In the U.S., CIA is praised for its hands-on approach to learning.`,
+
+        theater: `Notable theater schools in Asia include National School of Drama in India and Tokyo University of the Arts. The former produces acclaimed actors who highlight its focus on classical traditions. In Europe, RADA is renowned for classical training that opens doors to London's theater scene. Yale's School of Drama in the U.S. is noted for its rigorous MFA program that has produced many successful alumni.`,
+
+        photography: `Top photography schools in Asia include NID in India and Tokyo College of Photography. NID emphasizes conceptual photography while Tokyo offers comprehensive training across formats. In Europe, LCC integrates technology creatively into its curriculum, receiving high praise from students. In the U.S., SCAD is known for pushing creative boundaries within both fine art and commercial photography contexts.`,
+    };
 
         async function loadModel() {
             const model = await use.load();
@@ -52,17 +126,13 @@
 
         async function handleQuestion() {
             const question = document.getElementById('question').value.toLowerCase();
-            const loadingDiv = document.getElementById('loading');
             const answerDiv = document.getElementById('answer');
 
-            // Show loading screen
-            loadingDiv.classList.remove('hidden');
             answerDiv.innerText = ''; // Clear previous answer
-
             const model = await loadModel();
 
             // Hide loading screen after model is loaded
-            loadingDiv.classList.add('hidden');
+            document.getElementById('loading-screen').style.display = 'none';
 
             // Determine relevant context based on the question
             let relevantContext = '';
@@ -71,18 +141,16 @@
                 relevantContext = context.architecture;
             } else if (question.includes('graphic arts') || question.includes('graphic design')) {
                 relevantContext = context.graphicArts;
-            } else if (question.includes('design')) {
-                relevantContext = context.design;
             } else if (question.includes('fashion')) {
                 relevantContext = context.fashion;
-            } else if (question.includes('animation')) {
-                relevantContext = context.animation;
-            } else if (question.includes('music')) {
-                relevantContext = context.music;
             } else if (question.includes('culinary')) {
                 relevantContext = context.culinary;
+            } else if (question.includes('music')) {
+                relevantContext = context.music;
             } else if (question.includes('theater')) {
                 relevantContext = context.theater;
+            } else if (question.includes('animation')) {
+                relevantContext = context.animation;
             } else if (question.includes('photography')) {
                 relevantContext = context.photography;
             }
@@ -92,6 +160,15 @@
         }
 
         document.getElementById('ask').onclick = handleQuestion;
+
+        // Simulate loading for the first time
+        window.onload = function() {
+            document.getElementById('loading-screen').style.display = 'flex';
+            loadModel().then(() => {
+                document.getElementById('loading-screen').style.display = 'none';
+            });
+        }
     </script>
+
 </body>
 </html>
