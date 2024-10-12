@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MentorshipScreen</title>
+</head>
+<body>
+
+    ```html
+<div style="display: flex; height: 100vh;">
+  <!-- Left Sidebar -->
+  <div style="width: 25%; background-color: #f3f4f6; padding: 16px;">
+    <div style="display: flex; align-items: center; margin-bottom: 32px;">
+      <img src="https://avatars.githubusercontent.com/u/122350750" alt="Company Logo" style="margin-right: 8px; width: 50px; height: 50px;" />
+      <h1 style="font-size: 1.5rem; font-weight: bold; color: #111827;">Mentor Connection</h1>
+    </div>
+    <ul style="list-style-type: none; padding: 0;">
+      <li style="display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-radius: 8px; cursor: pointer; background-color: #e5e7eb; color: #111827; margin-bottom: 4px;">
+        <img src="https://storage.gignite.ai/mediaengine/Placeholder_view_vector.svg.png" alt="Find Mentors" style="width: 20px; height: 20px;" />
+        <span>Find Mentors</span>
+      </li>
+      <li style="display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-radius: 8px; cursor: pointer; hover: { background-color: #e5e7eb; color: #111827; } margin-bottom: 4px;">
+        <img src="https://storage.gignite.ai/mediaengine/Placeholder_view_vector.svg.png" alt="My Sessions" style="width: 20px; height: 20px;" />
+        <span>My Sessions</span>
+      </li>
+      <li style="display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-radius: 8px; cursor: pointer; hover: { background-color: #e5e7eb; color: #111827; }">
+        <img src="https://storage.gignite.ai/mediaengine/Placeholder_view_vector.svg.png" alt="Portfolio Review" style="width: 20px; height: 20px;" />
+        <span>Portfolio Review</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Central Content Area -->
+  <div style="flex: 1; padding: 16px;">
+    <div>
+      <h2 style="font-size: 1.875rem; font-weight: bold; margin-bottom: 16px; color: #111827;">Find Your Perfect Mentor</h2>
+      <input placeholder="Search by expertise, name, or keyword" style="display: block; width: 100%; padding: 8px; margin-bottom: 24px; border: 1px solid #d1d5db; border-radius: 4px;" />
+      <div style="display: grid; grid-gap: 24px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+        ${mentors.map((mentor) => `
+          <div style="display: flex; flex-direction: column; height: 100%; border: 1px solid #d1d5db; border-radius: 8px; overflow: hidden;">
+            <div style="padding: 16px; display: flex; align-items: center;">
+              <img src="${mentor.image}" alt="${mentor.name}" style="border-radius: 100%; width: 50px; height: 50px; margin-right: 16px;" />
+              <div>
+                <h3 style="font-size: 1rem; font-weight: bold;">${mentor.name}</h3>
+                <p style="font-size: 0.875rem; color: #6b7280;">${mentor.title}</p>
+              </div>
+            </div>
+            <div style="flex: 1; padding: 16px;">
+              <p style="margin-bottom: 16px;">${mentor.expertise}</p>
+              <p style="font-size: 0.875rem; color: #6b7280;">${mentor.bio}</p>
+            </div>
+            <div style="padding: 16px;">
+              <button style="width: 100%; padding: 8px; border-radius: 8px; background-color: #2563eb; color: white;">Book Session</button>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Sidebar -->
+  <div style="width: 25%; background-color: #f3f4f6; padding: 16px;">
+    <div style="margin-bottom: 32px;">
+      <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 16px; color: #111827;">Upcoming Session</h3>
+      <div style="border: 1px solid #d1d5db; border-radius: 8px; overflow: hidden;">
+        <div style="padding: 16px;">
+          <h4 style="font-size: 1rem; font-weight: bold;">Jon Oh</h4>
+          <p style="font-size: 0.875rem; color: #6b7280;">October 15, 2023</p>
+        </div>
+        <div style="padding: 16px;">
+          <p>Join an upcoming session with Jon Oh at the scheduled date and time. Review the details and enter the session to start your mentoring meeting.</p>
+        </div>
+        <div style="padding: 16px;">
+          <button style="width: 100%; padding: 8px; border-radius: 8px; background-color: #2563eb; color: white;">Join Session</button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 16px; color: #111827;">Portfolio Review Request</h3>
+      <div style="border: 1px solid #d1d5db; border-radius: 8px; overflow: hidden;">
+        <div style="padding: 16px;">
+          <h4 style="font-size: 1rem; font-weight: bold;">Submitted</h4>
+        </div>
+        <div style="padding: 16px;">
+          <p>Your portfolio is currently under review. Please allow up to 5 business days for the review process. Your mentor will provide detailed feedback and suggestions for improvement.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniversityMatchingScreen</title>
+</head>
+<body>
+
+    ```html
+<div style="min-height: 100vh; background-color: #fff; color: #000;">
+  <header style="background-color: #f8f9fa; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 24px 32px; display: flex; align-items: center; justify-content: space-between;">
+      <div style="display: flex; align-items: center;">
+        <img 
+          style="height: 48px; width: auto; border-radius: 9999px;"
+          src="https://avatars.githubusercontent.com/u/122350750"
+          alt="Logo for Tailwind CSS, a static site generator, next to a purple square with the number 4 and the word 'fourth' in white, which is next to the words 'GitHub repository'."  
+          width="48"
+          height="48"
+        />
+        <h1 style="margin-left: 16px; font-size: 24px; font-weight: bold; color: #000;">ArtUni</h1>
+      </div>
+      <nav style="display: flex; gap: 16px;">
+        <a href="#" style="text-decoration: none; color: inherit; transition: text-decoration 0.2s;">Home</a>
+        <a href="#" style="text-decoration: none; color: inherit; transition: text-decoration 0.2s;">About</a>
+        <a href="#" style="text-decoration: none; color: inherit; transition: text-decoration 0.2s;">Profile</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main style="max-width: 1120px; margin: 0 auto; padding: 32px 32px;">
+    <div style="margin-bottom: 32px;">
+      <img 
+        style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"
+        src="https://storage.gignite.ai/mediaengine/model1/28ad8005-1f59-43f7-9d7b-452ffd1270c7.png"
+        alt="Unsplash image of a university campus" 
+        width="1200"
+        height="400"
+      />
+    </div>
+    
+    <div style="margin-bottom: 32px; background-color: #f8f9fa; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 24px;">
+      <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 16px; color: #000;">Find Your Perfect Art University</h2>
+      <p style="color: #6b7280; margin-bottom: 24px;">Get personalized recommendations based on your portfolio, interests, and academic background.</p>
+      <div style="max-width: 448px; display: flex;">
+        <div style="flex: 1;">
+          <label for="search" style="display: block; font-size: 12px; font-weight: 500; color: #111827;">
+            <span style="position: absolute; clip: rect(0 0 0 0);"></span>
+          </label>
+          <div style="position: relative; background-color: #fff; border-radius: 8px;">
+            <div style="pointer-events: none; position: absolute; inset-y: 0; left: 0; padding-left: 12px; display: flex; align-items: center;">
+              <svg style="width: 20px; height: 20px; color: #6b7280;" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657a2.657 2.657 0 113.748-3.748L21 15m-3 0a2.657 2.657 0 00-3-3H6.5a1.5 1.5 0 00-1.5 1.5v3.5a1.5 1.5 0 001.5 1.5h11z" />
+              </svg>
+            </div>
+            <input 
+              id="search"
+              style="width: 100%; padding-left: 32px; font-size: 14px; border: none; border-radius: 8px; height: 40px;"
+              placeholder="E.g. New York, Fine Arts"
+            />
+          </div>
+        </div>
+        <div style="margin-left: 16px;">
+          <button 
+            type="button"
+            style="display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 12px 24px; border: none; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color: #1f2937; font-size: 14px; font-weight: 500; color: #fff; transition: background-color 0.2s;"
+          >
+            Start Search
+            <svg style="margin-left: 10px; margin-right: -6px; width: 16px; height: 16px; color: currentColor;" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 19l-3.872-3.872a6 6 0 10-4.243-4.243L5 5l-1.5 1.5L19 19z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 16px; color: #000;">Top Art Universities</h2>
+    <div style="display: grid; gap: 24px; grid-template-columns: repeat(3, 1fr); margin-bottom: 32px;">
+      ${Array.from({length: 6}).map(() => `
+        <div style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+          <div style="border-top-left-radius: 8px; border-top-right-radius: 8px; overflow: hidden;">
+            <img 
+              style="border-top-left-radius: 8px; border-top-right-radius: 8px; width: 100%; display: block;" 
+              src="https://source.unsplash.com/random/?campus&w=600&h=400&q=100" 
+              width="600"
+              height="400"
+              alt="University campus"
+            />
+          </div>
+          <div style="padding: 16px;">
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px; color: #000;">University Name</h3>
+            <div style="display: flex; align-items: center; font-size: 14px; color: #6b7280;">
+              <svg style="width: 20px; height: 20px; margin-right: 8px;" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12m-9 9a9 9 0 118.8-8.988A6 6 0 107.2 1.957L12 12z" />
+              </svg>
+              Private
+            </div>
+            <div style="display: flex; align-items: center; font-size: 14px; color: #6b7280; margin-top: 8px;">  
+              <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14.5v4M5 14.5v-4m8.354 4.354a2 2 0 102.292 0M12 7.5v10" />
+              </svg>
+              <span style="margin-left: 8px;">Top 10</span>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: flex-end; padding: 16px;">
+            <a 
+              href="#" 
+              style="text-decoration: none; border-radius: 8px; background-color: #1f2937; padding: 8px 16px; font-size: 14px; font-weight: 500; color: #fff; transition: background-color 0.2s;"  
+            >
+              Learn More
+            </a>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+    
+    <div style="background-color: #f8f9fa; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 24px;">
+      <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 16px; color: #000; display: flex; align-items: center;">
+        <img 
+          style="border-radius: 9999px; margin-right: 8px;"
+          src="https://avatars.githubusercontent.com/u/122350750" 
+          width="24"
+          height="24"
+          alt="Logo for Fourth.js, a static site generator: a blue square with rounded corners and the number 4 in the center in white." 
+        />
+        Your Profile Summary
+      </h2>
+      <div style="space-y: 8px;">
+        <div style="display: flex; align-items: center;">
+          <span style="display: inline-block; height: 24px; width: 24px; border-radius: 9999px; background-color: #e5e7eb; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500; color: #1f2937;">
+            4
+          </span>
+          <p style="margin-left: 11px; font-size: 14px; color: #6b7280;">Art and Design Interests</p>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <span style="display: inline-block; height: 24px; width: 24px; border-radius: 9999px; background-color: #e5e7eb; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500; color: #1f2937;">
+            A-
+          </span>
+          <p style="margin-left: 11px; font-size: 14px; color: #6b7280;">GPA: 3.7</p>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <span style="display: inline-block; height: 24px; width: 24px; border-radius: 9999px; background-color: #e5e7eb; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500; color: #1f2937;">
+            EC
+          </span>
+          <p style="margin-left: 11px; font-size: 14px; color: #6b7280;">Extracurricular Activities</p>  
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+```
+
+</body>
+</html>
