@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Recommendation System</title>
+    <!-- Load TensorFlow.js and the Question-Answering Model -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/qna"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        #result { margin-top: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        .hidden { display: none; }
+        label, input, button { margin-top: 10px; display: block; }
+    </style>
+</head>
+<body>
+    <h1>University Recommendation System</h1>
+
+    <label for="userQuestion">Ask your question based on the context:</label>
+    <input type="text" id="userQuestion" placeholder="Ask your question...">
+
+    <button onclick="handleQuestion()">Get Answer</button>
+
+    <div id="result" class="hidden"></div>
+
+    <script>
+        let model;
+        let context = '';
+
+        // Load the TensorFlow.js model and fetch the context from the file
+        async function loadModel() {
+            model = await qna.load();
+            console.log("Model loaded.");
+            await fetchContext();  // Fetch the context after the model is loaded
+        }
+
+        // Fetch context from the text file
+        async function fetchContext() {
+            try {
+                const response = await fetch('contextfile.txt');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch context from file.');
+                }
+                context = await response.text(); // Load the entire content of the text file as context
+                console.log('Context loaded:', context);
+            } catch (error) {
+                console.error('Error fetching context:', error);
+            }
+        }
+
+        // Handle the question input and provide the answer
+        async function handleQuestion() {
+            const userQuestion = document.getElementById('userQuestion').value;
+            const resultDiv = document.getElementById('result');
+
+            // Ensure context is loaded and a question is provided
+            if (context && userQuestion) {
+                try {
+                    // Use the model to find answers based on the context
+                    const answers = await model.findAnswers(userQuestion, context);
+                    console.log('Model answers:', answers);
+
+                    // Display the answers or handle cases where no relevant answer is found
+                    if (answers.length > 0) {
+                        resultDiv.textContent = `Answer: ${answers[0].text}`;
+                    } else {
+                        resultDiv.textContent = "No relevant answer found for your question.";
+                    }
+
+                    resultDiv.classList.remove('hidden');
+                } catch (error) {
+                    console.error("Error with model processing:", error);
+                    resultDiv.textContent = "An error occurred while processing your question.";
+                    resultDiv.classList.remove('hidden');
+                }
+            } else {
+                resultDiv.textContent = "Please provide a question and ensure context is loaded.";
+                resultDiv.classList.remove('hidden');
+            }
+        }
+
+        // Load the model and context when the page loads
+        window.onload = loadModel;
+    </script>
+</body>
+</html>

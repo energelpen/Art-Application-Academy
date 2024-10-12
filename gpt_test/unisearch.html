@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Recommendation</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-5">
+    <div class="max-w-md mx-auto bg-white p-5 rounded shadow">
+        <h1 class="text-2xl font-bold mb-4">University Recommendation Finder</h1>
+        <form id="uniForm">
+            <label for="region" class="block mb-2">Select Your Region:</label>
+            <select id="region" class="block w-full mb-4 p-2 border rounded">
+                <option value="Asia">Asia</option>
+                <option value="Europe">Europe</option>
+                <option value="North America">North America</option>
+                <option value="Australia and Oceania">Australia and Oceania</option>
+                <option value="Middle East">Middle East</option>
+            </select>
+            <label for="gpa" class="block mb-2">Enter Your GPA:</label>
+            <input type="text" id="gpa" class="block w-full mb-4 p-2 border rounded" required />
+            <label for="specialty" class="block mb-2">Art Specialty Area:</label>
+            <input type="text" id="specialty" class="block w-full mb-4 p-2 border rounded" required />
+            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Get Recommendation</button>
+        </form>
+        <div id="recommendation" class="mt-5 p-4 bg-gray-200 rounded hidden"></div>
+    </div>
+    
+    <script src="script.js" type="module"></script>
+</body>
+</html>
