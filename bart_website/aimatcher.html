@@ -41,9 +41,9 @@
         <p class="ml-4">Loading model, please wait...</p>
     </div>
 
-    <div class="flex min-h-screen">
+    <div class="flex flex-col lg:flex-row min-h-screen">
         <!-- Left Sidebar -->
-        <div class="bg-white text-blue-600 w-64 p-6 hidden lg:block border-r border-gray-300">
+        <div class="bg-white text-blue-600 w-full lg:w-64 p-6 hidden lg:block border-r border-gray-300">
             <h2 class="text-3xl font-bold mb-8">Menu</h2>
             <ul class="space-y-4">
                 <li><a href="#" class="block hover:bg-blue-100 p-2 rounded">Home</a></li>
@@ -54,24 +54,24 @@
 
         <!-- Main Content -->
         <div class="flex-1 p-4 lg:p-8">
-            <h1 class="text-4xl font-bold text-center mb-8 text-blue-600">AI Matcher</h1>
+            <h1 class="text-3xl md:text-4xl font-bold text-center mb-8 text-blue-600">AI Matcher</h1>
 
             <!-- Chat Input Box -->
-            <div class="flex items-center mb-4">
-                <input type="text" id="question" placeholder="Ask about universities or courses..." class="w-full p-3 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                <button id="ask" class="bg-blue-500 text-white px-4 py-3 rounded-r-lg hover:bg-blue-600">Send</button>
+            <div class="flex flex-col md:flex-row items-center mb-4">
+                <input type="text" id="question" placeholder="Ask about universities or courses..." class="w-full p-3 border border-gray-300 rounded-t-lg md:rounded-l-lg md:rounded-t-none focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <button id="ask" class="w-full md:w-auto bg-blue-500 text-white px-4 py-3 rounded-b-lg md:rounded-r-lg hover:bg-blue-600">Send</button>
             </div>
 
             <!-- Suggestions (scrolling) -->
             <div class="bg-gray-100 p-2 rounded shadow-sm overflow-hidden mb-4">
-                <div class="suggestions space-x-16 items-center"> <!-- Increased space between buttons -->
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about architecture universities'">Architecture</button>
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about graphic arts universities'">Graphic Arts</button>
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about fashion universities'">Fashion</button>
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about music universities'">Music</button>
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about theater universities'">Theater</button>
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about animation universities'">Animation</button>
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about photography universities'">Photography</button>
+                <div class="suggestions space-x-4 md:space-x-8 items-center">
+                    <button class="bg-blue-500 text-white px-3 py-2 text-xs md:text-sm rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about architecture universities'">Architecture</button>
+                    <button class="bg-blue-500 text-white px-3 py-2 text-xs md:text-sm rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about graphic arts universities'">Graphic Arts</button>
+                    <button class="bg-blue-500 text-white px-3 py-2 text-xs md:text-sm rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about fashion universities'">Fashion</button>
+                    <button class="bg-blue-500 text-white px-3 py-2 text-xs md:text-sm rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about music universities'">Music</button>
+                    <button class="bg-blue-500 text-white px-3 py-2 text-xs md:text-sm rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about theater universities'">Theater</button>
+                    <button class="bg-blue-500 text-white px-3 py-2 text-xs md:text-sm rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about animation universities'">Animation</button>
+                    <button class="bg-blue-500 text-white px-3 py-2 text-xs md:text-sm rounded hover:bg-blue-600" onclick="document.getElementById('question').value='Tell me about photography universities'">Photography</button>
                 </div>
             </div>
 
@@ -80,7 +80,7 @@
         </div>
 
         <!-- Right Sidebar -->
-        <div class="bg-white text-blue-600 w-64 p-6 hidden lg:block border-l border-gray-300">
+        <div class="bg-white text-blue-600 w-full lg:w-64 p-6 hidden lg:block border-l border-gray-300">
             <h2 class="text-3xl font-bold mb-8">Navigation</h2>
             <ul class="space-y-4">
                 <li><a href="#" class="block hover:bg-blue-100 p-2 rounded">Universities</a></li>
@@ -92,32 +92,25 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-white text-blue-600 py-4 text-center fixed inset-x-0 bottom-0 border-t border-gray-300">
-        <p class="text-lg">AAA - Art Application Academy</p>
+    <footer class="bg-white text-blue-600 py-4 text-center border-t border-gray-300">
+        <p class="text-sm md:text-lg">AAA - Art Application Academy</p>
+        <p class="text-sm mt-2 text-wrap">Powered by MobileBERT, a fast, compressed version of BERT pre-trained on SQuAD 2.0.</p>
     </footer>
 
     <script>
         // Hardcoded context
         const context = {
-        architecture: `In Asia, notable architecture universities include the National University of Singapore, Tsinghua University, and Tongji University. Students at NUS commend its strong emphasis on sustainability and urban planning, while Tsinghua is recognized for merging traditional Chinese design with modern techniques. In Europe, ETH Zurich and Politecnico di Milano stand out for their technical rigor and industrial connections. Graduates from ETH often highlight the intense workload but appreciate the quality of education. In the U.S., MIT is praised for its integration of engineering with design, while UC Berkeley is noted for its commitment to social responsibility. Reviews indicate that both institutions offer robust support networks for students.`,
-
-        graphicArts: `Top graphic arts programs in Asia include Hong Kong Polytechnic University and Kyoto Seika University. Students at HKPU appreciate its focus on digital media, while Kyoto Seika is noted for blending traditional Japanese art with modern practices. In Europe, the Royal College of Art is celebrated for its creativity, with alumni often citing strong industry ties. In the U.S., RISD is revered for its interdisciplinary approach, with students praising the challenging curriculum and access to resources.`,
-
-        design: `Leading design universities in Asia include the National Institute of Design in India and Nanyang Technological University in Singapore. NID is recognized for its innovative approach, while NTU emphasizes practical applications. In Europe, Politecnico di Milano is well-regarded for its industrial design program, with graduates mentioning its international exposure. In the U.S., ArtCenter College of Design is noted for its industry connections and project opportunities.`,
-
-        fashion: `Prominent fashion schools in Asia include Bunka Fashion College and Hong Kong Polytechnic University’s Institute of Textiles and Clothing. Bunka is famous for producing influential designers, while HKPU offers a strong curriculum focused on sustainability. In Europe, Central Saint Martins is known for fostering creativity, with students frequently praising its experimental approach. In the U.S., Parsons School of Design integrates sustainability into its programs, earning high marks from students.`,
-
-        animation: `Top animation schools in Asia include Tokyo University of the Arts and Beijing Film Academy. Students at Tokyo appreciate the blend of traditional and modern techniques. In Europe, NFTS provides hands-on experience that alumni find invaluable. In the U.S., CalArts is highly regarded for its influence on the animation industry, with many graduates landing roles at major studios.`,
-
-        music: `Leading music schools in Asia include Tokyo University of the Arts and Seoul National University. Students at Tokyo praise its rigorous training, while SNU focuses on both performance and musicology. In Europe, the Royal Academy of Music emphasizes performance excellence, garnering positive reviews from students. In the U.S., Juilliard is consistently rated highly for its competitive atmosphere and world-class faculty.`,
-
-        theater: `Notable theater schools in Asia include National School of Drama in India and Tokyo University of the Arts. The former produces acclaimed actors who highlight its focus on classical traditions. In Europe, RADA is renowned for classical training that opens doors to London's theater scene. Yale's School of Drama in the U.S. is noted for its rigorous MFA program that has produced many successful alumni.`,
-
-        photography: `Top photography schools in Asia include NID in India and Tokyo College of Photography. NID emphasizes conceptual photography while Tokyo offers comprehensive training across formats. In Europe, LCC integrates technology creatively into its curriculum, receiving high praise from students. In the U.S., SCAD is known for pushing creative boundaries within both fine art and commercial photography contexts.`,
-    };
+            architecture: `In Asia, notable architecture universities include the National University of Singapore, Tsinghua University, and Tongji University. Students at NUS commend its strong emphasis on sustainability and urban planning, while Tsinghua is recognized for merging traditional Chinese design with modern techniques. In Europe, ETH Zurich and Politecnico di Milano stand out for their technical rigor and industrial connections. Graduates from ETH often highlight the intense workload but appreciate the quality of education. In the U.S., MIT is praised for its integration of engineering with design, while UC Berkeley is noted for its commitment to social responsibility. Reviews indicate that both institutions offer robust support networks for students.`,
+            graphicArts: `Top graphic arts programs in Asia include Hong Kong Polytechnic University and Kyoto Seika University. Students at HKPU appreciate its focus on digital media, while Kyoto Seika is noted for blending traditional Japanese art with modern practices. In Europe, the Royal College of Art is celebrated for its creativity, with alumni often citing strong industry ties. In the U.S., RISD is revered for its interdisciplinary approach, with students praising the challenging curriculum and access to resources.`,
+            design: `Leading design universities in Asia include the National Institute of Design in India and Nanyang Technological University in Singapore. NID is recognized for its innovative approach, while NTU emphasizes practical applications. In Europe, Politecnico di Milano is well-regarded for its industrial design program, with graduates mentioning its international exposure. In the U.S., ArtCenter College of Design is noted for its industry connections and project opportunities.`,
+            fashion: `Prominent fashion schools in Asia include Bunka Fashion College and Hong Kong Polytechnic University’s Institute of Textiles and Clothing. Bunka is famous for producing influential designers, while HKPU offers a strong curriculum focused on sustainability. In Europe, Central Saint Martins is known for fostering creativity, with students frequently praising its experimental approach. In the U.S., Parsons School of Design integrates sustainability into its programs, earning high marks from students.`,
+            animation: `Top animation schools in Asia include Tokyo University of the Arts and Beijing Film Academy. Students at Tokyo appreciate the blend of traditional and modern techniques. In Europe, NFTS provides hands-on experience that alumni find invaluable. In the U.S., CalArts is highly regarded for its influence on the animation industry, with many graduates landing roles at major studios.`,
+            music: `Leading music schools in Asia include Tokyo University of the Arts and Seoul National University. Students at Tokyo praise its rigorous training, while SNU focuses on both performance and musicology. In Europe, the Royal Academy of Music emphasizes performance excellence, garnering positive reviews from students. In the U.S., Juilliard is consistently rated highly for its competitive atmosphere and world-class faculty.`,
+            theater: `Notable theater schools in Asia include National School of Drama in India and Tokyo University of the Arts. The former produces acclaimed actors who highlight its focus on classical traditions. In Europe, RADA is renowned for classical training that opens doors to London's theater scene. Yale's School of Drama in the U.S. is noted for its rigorous MFA program that has produced many successful alumni.`,
+            photography: `Top photography schools in Asia include NID in India and Tokyo College of Photography. NID emphasizes conceptual photography while Tokyo offers comprehensive training across formats. In Europe, LCC integrates technology creatively into its curriculum, receiving high praise from students. In the U.S., SCAD is known for pushing creative boundaries within both fine art and commercial photography contexts.`
+        };
 
         async function loadModel() {
-            // Using Universal Sentence Encoder from TensorFlow.js
             const model = await use.load();
             return model;
         }
@@ -129,10 +122,8 @@
             answerDiv.innerText = ''; // Clear previous answer
             const model = await loadModel();
 
-            // Hide loading screen after model is loaded
             document.getElementById('loading-screen').style.display = 'none';
 
-            // Determine relevant context based on the question
             let relevantContext = '';
 
             if (question.includes('architecture')) {
@@ -151,13 +142,11 @@
                 relevantContext = context.photography;
             }
 
-            // Display the relevant context as the answer
             answerDiv.innerText = relevantContext || 'Sorry, I don\'t have information on that topic.';
         }
 
         document.getElementById('ask').onclick = handleQuestion;
 
-        // Simulate loading for the first time
         window.onload = function() {
             document.getElementById('loading-screen').style.display = 'flex';
             loadModel().then(() => {
